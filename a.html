@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Dashboard</title>
+    <style>
+        body{
+            overflow: hidden;
+        }
+@media (min-width: 768px){
+  .main.active{
+    margin-left: 0px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px){
+  .md\:ml-64{
+    margin-left: 16rem;
+  }
+
+  .md\:hidden{
+    display: none;
+  }
+
+  .md\:w-\[calc\(100\%-256px\)\]{
+    width: calc(100% - 256px);
+  }
+
+  .md\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+    </style>
+</head>
+<body class="text-blue-800 font-inter">
+    
+    <!-- start: Sidebar -->
+    <div class="fixed left-0 top-0 w-64 h-full bg-gray-400 p-4 z-50 sidebar-menu transition-transform">
+        <aside class="fixed  inset-y-0 left-0 bg-gray-100 overflow-hidden overflow-y-auto transition-transform transform"
+            :class="{ '-translate-x-full': !open, 'translate-x-0': open }">
+            <header class="bg-gray-500  gap-2 p-4 flex justify-end">
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <i id="bellIcon" class="fas fa-bell mr-2 rounded-full hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ml-2 cursor-pointer"></i>
+                        <div id="dropdownMenus" class="hidden h-[300px] w-[400px] absolute left-3  mt-2 w-full bg-gray-400  border rounded-md shadow-md overflow-hidden z-50">
+                                <h1 class="bg-blue-700 text-black font-bold">Notifications</h1><hr class="border-black">
+                                <div class="notification-item text-black font-bold">
+                                    <p>New notification content goes here!</p>
+                                </div>
+                                
+                        </div>
+                        <i id="signInIcon" class="fas fa-sign-in-alt mr-2 rounded-full hover:bg-green-600 text-white font-bold py-2 px-4 rounded cursor-pointer"></i>
+                        <div id="dropdownMenu" class="hidden absolute left-3 mt-2 w-64 bg-gray-400 border rounded-md shadow-md overflow-hidden z-50">
+                            <hr class="border-black">
+                            <a href="#" class="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                <i class="fas fa-user-circle mr-2"></i>
+                                Profile
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                <i class="fas fa-cogs mr-2"></i>
+                                Settings
+                            </a>
+                            <div class="group relative absolute z-50">
+                                <a href="#" class="flex items-center  px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                    <i class="fas fa-info-circle mr-2"></i>
+                                    Status
+                                </a>
+                                <div class="hidden absolute left-16 top-0 mt-2 bg-white border rounded-md shadow-md overflow-hidden group-hover:block">
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                        <i class="fas fa-circle text-green-500 mr-2"></i>
+                                        Online
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                        <i class="fas fa-circle text-yellow-500 mr-2"></i>
+                                        Away
+                                    </a>
+                                    <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                        <i class="fas fa-circle text-red-500 mr-2"></i>
+                                        Busy
+                                    </a>
+                                </div>
+                            </div>
+                            <a href="#" class="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-200">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
+                                Sign Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            
+                <script>
+                    document.getElementById('signInIcon').addEventListener('click', function () {
+                        var dropdownMenu = document.getElementById('dropdownMenu');
+                        dropdownMenu.classList.toggle('hidden');
+                    });
+                    document.getElementById('bellIcon').addEventListener('click', function () {
+                        var dropdownMenus = document.getElementById('dropdownMenus');
+                        dropdownMenus.classList.toggle('hidden');
+                    });
+                   
+                    window.addEventListener('click', function (event) {
+                        var dropdownMenu = document.getElementById('dropdownMenu');
+                        if (!event.target.matches('#bellIcon') && !event.target.matches('#signInIcon')) {
+                            if (!dropdownMenu.classList.contains('hidden')) {
+                                dropdownMenu.classList.add('hidden');
+                            }
+                        }
+                    });
+                </script>
+            </header>
+            <!-- Logo -->
+            <div class="text-center mt-8">
+                <img src="images/logo.jpeg" alt="Logo" class="w-16 h-16 rounded-full mx-auto mb-4">
+                <p class="font-bold text-2xl">Nelson Mendel</p>
+                <p class="text-gray-600">abc@gmail.com</p>
+            </div>
+                        
+            <!-- Navigation Links -->
+            <div class="mt-4 p-4">
+                <span class="ml-2 font-bold text-xl uppercase text-blue-800">Dashboard</span>
+                <p class="ml-2 text-sm">Unique dashboard design</p>
+                <div class="mt-2 flex-col p-3 text-xl">
+                    <!-- Navigation Links -->
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-cogs icon mr-2"></i>
+                        <span class="hover:text-blue-500">Project</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-chart-bar icon mr-2"></i>
+                        <span class="hover:text-blue-500">Analytics</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-money-bill-wave icon mr-2"></i>
+                        <span class="hover:text-blue-500">Finance</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fab fa-bitcoin icon mr-2"></i>
+                        <span class="hover:text-blue-500">Crypto</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Application Section -->
+            <div class="mt-2 p-4">
+                <span class="ml-2 font-bold text-xl uppercase text-blue-800">Application</span>
+                <p class="ml-2 text-sm">Custom mode application</p>
+                <div class="text-xl p-3">
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-graduation-cap icon mr-2"></i>
+                        <span class="hover:text-blue-500">Academy</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-file-contract icon mr-2"></i>
+                        <span class="hover:text-blue-500">Contracts</span>
+                    </a>
+
+                    <div class="mt-1 rounded w-[200px]" id="e-commerceMenu">
+                        <a href="#" class="mb-2 flex items-center relative" onclick="toggleSubmenu('e-commerceMenu')">
+                            <i class="fas fa-shopping-cart icon mr-2"></i>
+                            <span>E-commerce</span>
+                            <i class="fas fa-caret-down ml-2"></i>
+                        </a>
+                        <script>
+                            function toggleSubmenu(menuId) {
+                            const image = document.querySelector('#img');
+                            image.classList.toggle('rotate-180');
+                        }
+                        </script>
+                        
+                        <ul class="submenu pl-4">
+                            <li class="submenu-item">
+                                <a href="#" class="mb-2 flex items-center">
+                                    <i class="fas fa-box icon mr-2"></i>
+                                    <span >Inventory</span>
+                                </a>
+                            </li>                 
+                        </ul>
+                    </div>
+
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-folder icon mr-2"></i>
+                        <span class="hover:text-blue-500">File Manager</span>
+                    </a>
+
+                    <div class="mt-1" id="helpCenterMenu">
+                        <a href="#" class="mb-2 flex items-center" onclick="toggleSubmenu('helpCenterMenu')">
+                            <i class="fas fa-question-circle icon mr-2"></i>
+                            <span class="hover:text-blue-500">Help Center</span>
+                            <i class="fas fa-caret-down ml-2"></i>
+                        </a>
+                        <ul class="submenu pl-4">
+                            <li class="submenu-item">
+                                <a href="#" class="mb-2 flex items-center">
+                                    <i class="fas fa-home icon mr-2"></i>
+                                    <span class="hover:text-blue-500">Home</span>
+                                </a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="mb-2 flex items-center">
+                                    <i class="fas fa-question-circle icon mr-2"></i>
+                                    <span class="hover:text-blue-500">FAQs</span>
+                                </a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="mb-2 flex items-center">
+                                    <i class="fas fa-book icon mr-2"></i>
+                                    <span class="hover:text-blue-500">Guides</span>
+                                </a>
+                            </li>
+                            <li class="submenu-item">
+                                <a href="#" class="mb-2 flex items-center">
+                                    <i class="fas fa-hands-helping icon mr-2"></i>
+                                    <span class="hover:text-blue-500">Support</span>
+                                </a>
+                            </li>
+                            <!-- Add more submenu items as needed -->
+                        </ul>
+                    </div>
+
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-inbox icon mr-2"></i>
+                        <span class="hover:text-blue-500">Mailbox</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-sticky-note icon mr-2"></i>
+                        <span class="hover:text-blue-500">Notes</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-tasks icon mr-2"></i>
+                        <span class="hover:text-blue-500">Scrum Board</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-tasks icon mr-2"></i>
+                        <span class="hover:text-blue-500">Tasks</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pages Section -->
+            <div class="mt-2 p-2">
+                <span class="ml-2 font-bold text-xl uppercase text-blue-800">Pages</span>
+                <p class="ml-2 text-sm">Custom mode page designs</p>
+                <div class="mt-2 flex-col p-3 text-xl">
+                    <div class="dropdown">
+                        <i class="fas fa-level-down-alt"></i>
+                        <button class="dropdown-btn">Authentication<i class="fas fa-caret-down ml-2"></i></button>
+                        <div class="dropdown-menu p-2">
+            <!--sign in-->
+                            <div class="dropdown">
+                                <button class="dropdown-btn p-3 px-4 py-2">Sign In<i class="fas fa-caret-down ml-2"></i></button>
+                                <ul class="dropdown-menu flex-col">
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Classic</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                </ul>
+                            </div>   
+                            <div class="dropdown">
+                                <button class="dropdown-btn p-3 px-4 py-2">Sign out<i class="fas fa-caret-down ml-2"></i></button>
+                                <ul class="dropdown-menu flex-col">
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Classic</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                </ul>
+                            </div>  
+                            <div class="dropdown">
+                                <button class="dropdown-btn p-3 px-4 py-2">Forget Password<i class="fas fa-caret-down ml-2"></i></button>
+                                <ul class="dropdown-menu flex-col">
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Classic</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                </ul>
+                            </div> 
+                            <div class="dropdown">
+                                <button class="dropdown-btn p-3 px-4 py-2">Reset<i class="fas fa-caret-down ml-2"></i></button>
+                                <ul class="dropdown-menu flex-col">
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Classic</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Split Screen Reversed</a> <!-- Added submenu -->
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div>
+                    </div>
+            
+        
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-user icon mr-2"></i>
+                        <span class="hover:text-blue-500">Profile</span>
+                    </a>
+
+                    <!-- Added Activities Link -->
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-tasks icon mr-2"></i>
+                        <span class="hover:text-blue-500">Activities</span>
+                    </a>
+
+                    <div class="drop">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <button class="dropdown-btn">Error <i class="fas fa-caret-down ml-2"></i></button>
+                        <div class="dropdown-menu p-3">
+                          
+                            <div class="dropdown-column">
+                                <button class="dropdown-btn p-3 px-4 py-2">404</button>
+                            </div>
+                            <div class="dropdown-column">
+                                <button class="dropdown-btn p-3 px-4 py-2">505</button>
+                            </div>
+                        </div>
+                    </div>
+            
+                    
+                      <script>
+                        document.addEventListener('click', function (event) {
+                          const dropdowns = document.querySelectorAll('.drop');
+                          dropdowns.forEach(function (drop) {
+                            if (!drop.contains(event.target)) {
+                              drop.querySelector('.dropdown-menu').style.display = 'none';
+                            }
+                          });
+                        });
+                    
+                        const Buttons = document.querySelectorAll('.drop > button');
+                            Buttons.forEach(function (button) {
+                          button.addEventListener('click', function () {
+                            const dropdownMenu = this.nextElementSibling;
+                            dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+                          });
+                        });
+                      </script>
+               
+        
+
+                    <div class="mt-2 flex-col overflow-hidden  text-xl">
+                        <div class="dropdowns">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            <button class="dropdown-btn"></i> Coming Soon <i class="fas fa-caret-down ml-2"></i></button>
+
+                            <div class="dropdown-menu p-3">
+                              
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Classic</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Modern</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Modern Reversed</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Split Screen</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Full Screen</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">FullScreen Reversed</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                
+                        
+                          <script>
+                            document.addEventListener('click', function (event) {
+                              const dropdowns = document.querySelectorAll('.dropdowns');
+                              dropdowns.forEach(function (dropdowns) {
+                                if (!dropdowns.contains(event.target)) {
+                                  dropdowns.querySelector('.dropdown-menu').style.display = 'none';
+                                }
+                              });
+                            });
+                        
+                            const dropdownB = document.querySelectorAll('.dropdowns > button');
+                            dropdownB.forEach(function (button) {
+                              button.addEventListener('click', function () {
+                                const dropdownMenu = this.nextElementSibling;
+                                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+                              });
+                            });
+                          </script>
+                    </div>
+
+                    <div class="dropdown">
+                        <i class="fas fa-file-invoice icon mr-2"></i>
+                        <button class="dropdown-btn">Invoice<i class="fas fa-caret-down ml-2"></i></button>
+                        <div class="dropdown-menu p-2">
+            <!--sign in-->
+                            <div class="dropdown">
+                                <button class="dropdown-btn p-3 px-4 py-2">Printable<i class="fas fa-caret-down ml-2"></i></button>
+                                <ul class="dropdown-menu flex-col">
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Classic</a> <!-- Added submenu -->
+                                    </li>
+                                    <li class="">
+                                        <a href="#" class="block px-4 py-2">Modern</a> <!-- Added submenu -->
+                                    </li>
+                                </ul>
+                            </div>   
+                            
+                            </div> 
+
+                    
+
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-tools icon mr-2"></i>
+                        <span class="hover:text-blue-500">Maintenance</span>
+                    </a>
+
+                    <div class="mt-2 flex-col overflow-hidden  text-xl">
+                        <div class="down">
+                            <i class="fas fa-dollar-sign icon mr-2"></i>
+                            <button class="dropdown-btn ">Pricing<i class="fas fa-caret-down ml-2"></i></button>
+                            <div class="dropdown-menu p-3">
+                              
+                                <div class="dropdown-column ">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Modern</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Simple</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Single</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Table</button>
+                                </div>
+                            </div>
+                        </div>
+                
+                        
+                          <script>
+                            document.addEventListener('click', function (event) {
+                              const dropdowns = document.querySelectorAll('.down');
+                              dropdowns.forEach(function (down) {
+                                if (!down.contains(event.target)) {
+                                    down.querySelector('.dropdown-menu').style.display = 'none';
+                                }
+                              });
+                            });
+                        
+                            const Button = document.querySelectorAll('.down > button');
+                                Button.forEach(function (button) {
+                              button.addEventListener('click', function () {
+                                const dropdownMenu = this.nextElementSibling;
+                                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+                              });
+                            });
+                          </script>
+                    </div>
+
+                    <a href="#" class="mb-2 mt-1 flex items-center">
+                        <i class="fas fa-cogs icon mr-2"></i>
+                        <span class="hover:text-blue-500">Settings</span>
+                    </a>
+                </div>
+                </div>
+          
+            
+
+
+            <!--User Interface-->
+            <div class="mt-2 p-4">
+                <span class="ml-2 font-bold text-xl uppercase text-blue-800">user interface</span>
+                <p class="ml-2 text-sm">Unique dashboard design</p>
+                <div class="mt-2 flex-col p-3 text-xl">
+                <!-- Additional Components -->
+                <div class="mt-2 flex-col text-xl">
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-search icon mr-2"></i>
+                        <span class="hover:text-blue-500">Advance Search</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-star icon mr-2"></i>
+                        <span class="hover:text-blue-500">Animation</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-th icon mr-2"></i>
+                        <span class="hover:text-blue-500">Cards</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-paint-brush icon mr-2"></i>
+                        <span class="hover:text-blue-500">Colors</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-check-circle icon mr-2"></i>
+                        <span class="hover:text-blue-500">Confirmation Dialog</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-table icon mr-2"></i>
+                        <span class="hover:text-blue-500">Data table</span>
+                    </a>
+                    <div class="mt-2 flex-col overflow-hidden  text-xl">
+                        <div class="menu">
+                            <i class="fas fa-file-alt icon mr-2"></i>
+                            <button class="dropdown-btn ">Forms<i class="fas fa-caret-down ml-2"></i></button>
+                            <div class="dropdown-menu p-3">                
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Fields</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Layouts</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Wizards</button>
+                                </div>
+                            </div>
+                        </div>
+                
+                        
+                          <script>
+                            document.addEventListener('click', function (event) {
+                              const dropdowns = document.querySelectorAll('.menu');
+                              dropdowns.forEach(function (menu) {
+                                if (!menu.contains(event.target)) {
+                                    menu.querySelector('.dropdown-menu').style.display = 'none';
+                                }
+                              });
+                            });
+                        
+                            const event = document.querySelectorAll('.menu > button');
+                                event.forEach(function (button) {
+                              button.addEventListener('click', function () {
+                                const dropdownMenu = this.nextElementSibling;
+                                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+                              });
+                            });
+                          </script>
+                    </div>
+                    <div class="mt-2 flex-col overflow-hidden  text-xl">
+                        <div class="iconMenu">
+                            <i class="fas fa-icons icon mr-2"></i>
+                            <button class="dropdown-btn ">Icons<i class="fas fa-caret-down ml-2"></i></button>
+                            <div class="dropdown-menu p-3">
+                              
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Icon Outline</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Icon Solid</button>
+                                </div>
+                                <div class="dropdown-column">
+                                    <button class="dropdown-btn p-3 px-4 py-2">Feather</button>
+                                </div>
+                            </div>
+                        </div>
+                
+                        
+                          <script>
+                            document.addEventListener('click', function (event) {
+                              const iconMenu = document.querySelectorAll('.iconMenu');
+                              iconMenu.forEach(function (iconMenu) {
+                                if (!iconMenu.contains(event.target)) {
+                                    iconMenu.querySelector('.dropdown-menu').style.display = 'none';
+                                }
+                              });
+                            });
+                        
+                            const s = document.querySelectorAll('.iconMenu > button');
+                                s.forEach(function (button) {
+                              button.addEventListener('click', function () {
+                                const dropdownMenu = this.nextElementSibling;
+                                dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+                              });
+                            });
+                          </script>
+                    </div>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-columns icon mr-2"></i>
+                        <span class="hover:text-blue-500">Page Layout</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-font icon mr-2"></i>
+                        <span class="hover:text-blue-500">Typography</span>
+                    </a>
+                </div>
+            </div>
+            </div>
+            
+        <!--Documentation-->
+            <div class="mt-2 p-4">
+                <span class="ml-2 font-bold text-xl uppercase text-blue-800">Documentation</span>
+                <p class="ml-2 text-sm">Unique dashboard design</p>
+                <!-- Additional Components -->
+                <div class="mt-2 flex-col text-xl">
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-file-alt icon mr-2"></i>
+                        <span class="hover:text-blue-500">Changelog</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-book icon mr-2"></i>
+                        <span class="hover:text-blue-500">Guides</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fab fa-google icon mr-2"></i>
+                        <span class="hover:text-blue-500">Material Components</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-microchip icon mr-2"></i>
+                        <span class="hover:text-blue-500">Fuse Components</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-puzzle-piece icon mr-2"></i>
+                        <span class="hover:text-blue-500">Other Components</span>
+                    </a>
+                </div>
+            </div>
+
+            <!--navigation features-->
+            <div class="mt-2 p-4">
+                <span class="ml-2 font-bold text-xl uppercase text-blue-800">navigation features</span>
+                <p class="ml-2 text-sm">Unique dashboard design</p>
+                
+                <div class="mt-2 flex-col overflow-hidden text-xl">
+                    <div class="dropdown">
+                        <i class="fas fa-level-down-alt"></i>
+                        <button class="dropdown-btn">Level 1 <i class="fas fa-caret-down ml-2"></i></button>
+                        <div class="dropdown-menu p-2">
+                          
+                            <div class="dropdown">
+                                <button class="dropdown-btn p-3 px-4 py-2">Level 2 <i class="fas fa-caret-down ml-2"></i></button>
+                                
+                                <div class="dropdown-menu">
+                                  
+                                    <div class="dropdown">
+                                        <button class="dropdown-btn px-4 py-2">Level 3 <i class="fas fa-caret-down ml-2"></i></button>
+                                        <div class="dropdown-menu">
+                                          
+                                            <div class="dropdown">
+                                                <button class="dropdown-btn px-4 py-2">Level 4 <i class="fas fa-caret-down ml-2"></i></button>
+                                                <div class="dropdown-menu">
+                                                  
+                                                    <div class="dropdown">
+                                                        <button class="dropdown-btn px-4 py-2">Level 5 <i class="fas fa-caret-down ml-2"></i></button>
+                                                        <div class="dropdown-menu">
+                                                            <a href="#" class="block px-4 py-2">Level 6</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    
+                    <script>
+                        document.addEventListener('click', function (event) {
+                          const dropdowns = document.querySelectorAll('.dropdown');
+                          dropdowns.forEach(function (dropdown) {
+                            if (!dropdown.contains(event.target)) {
+                              dropdown.querySelector('.dropdown-menu').style.display = 'none';
+                              dropdown.querySelector('i').classList.remove('rotate-icon'); // Remove the rotation class
+                            }
+                          });
+                        });
+                      
+                        const dropdownButtons = document.querySelectorAll('.dropdown > button');
+                        dropdownButtons.forEach(function (button) {
+                          button.addEventListener('click', function () {
+                            const dropdownMenu = this.nextElementSibling;
+                            dropdownMenu.style.display = (dropdownMenu.style.display === 'block') ? 'none' : 'block';
+                      
+                            // Toggle the rotation class on icon
+                            this.querySelector('i').classList.toggle('rotate-icon');
+                          });
+                        });
+                      </script>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-check-circle icon mr-2"></i>
+                        <span class="hover:text-blue-500">Active Items</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-certificate text-blue-500 mr-2"></i>
+                        <span class="">Oval Badge</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-certificate "></i>
+                        <span class="">Rectangle Badge</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-certificate "></i>
+                        <span class="">Rounded Badge</span>
+                    </a>
+                    <a href="#" class="mb-2 flex items-center">
+                        <i class="fas fa-certificate "></i>
+                        <span class="">Simple Badge</span>
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <script>
+            function toggleSubmenu(menuId) {
+                var submenu = document.getElementById(menuId).querySelector('.submenu');
+                submenu.style.display = (submenu.style.display === 'none' || submenu.style.display === '') ? 'block' : 'none';
+            }
+        </script>
+    </div>
+    <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-50 md:hidden sidebar-overlay"></div>
+    <!-- end: Sidebar -->
+
+    <!-- start: Main -->
+    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 min-h-screen transition-all main">
+        <div class="py-2 px-6 bg-gray-500 flex shadow-md shadow-black/5 sticky top-0">
+            <button type="button" class="text-lg w-10 h-9 text-gray-600  sidebar-toggle ml-1 md:ml-8">
+                <i class="ri-menu-line text-black font-bold"></i>
+            </button>
+    
+            <header class="p-1 pl-4 md:pl-8 flex inset-y-0 gap-2 md:gap-8">
+                <div class="flex text-end text-black space-x-2 md:space-x-4 ">
+                    <i class="far fa-envelope text-xl md:text-3xl lg:text-4xl mr-2 md:mr-4 transform transition-transform hover:scale-110"></i>
+                    <i class="fas fa-keyboard text-xl md:text-3xl lg:text-4xl mr-2 md:mr-4 transform transition-transform hover:scale-110"></i>
+                    <i class="fas fa-search text-xl md:text-3xl lg:text-4xl mr-2 md:mr-4 transform transition-transform hover:scale-110"></i>
+                    <i class="fas fa-expand-arrows-alt text-xl md:text-3xl lg:text-4xl mr-2 md:mr-4 transform transition-transform hover:scale-110"></i>
+                    <i class="fas fa-globe text-xl md:text-3xl lg:text-4xl transform transition-transform hover:scale-110"></i>
+                </div>
+            </header> 
+        </div>
+
+        <div>
+            <h3>
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </h3>
+        </div>
+    </main>
+    
+   
+    <script>
+        // start: Sidebar
+const sidebarToggle = document.querySelector('.sidebar-toggle')
+const sidebarOverlay = document.querySelector('.sidebar-overlay')
+const sidebarMenu = document.querySelector('.sidebar-menu')
+const main = document.querySelector('.main')
+sidebarToggle.addEventListener('click', function (e) {
+    e.preventDefault()
+    main.classList.toggle('active')
+    sidebarOverlay.classList.toggle('hidden')
+    sidebarMenu.classList.toggle('-translate-x-full')
+})
+sidebarOverlay.addEventListener('click', function (e) {
+    e.preventDefault()
+    main.classList.add('active')
+    sidebarOverlay.classList.add('hidden')
+    sidebarMenu.classList.add('-translate-x-full')
+})
+
+// end: Sidebar
+
+    </script>
+</body>
+</html>
